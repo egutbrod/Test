@@ -30,6 +30,14 @@ jobs:
    #   env:
     #    Configuration: ${{ matrix.configuration }}
     
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Restore Dependencies
+      run: dotnet restore src/Example.sln
+      
     - name: Build
       run: dotnet build src/Example.sln --configuration ${{ matrix.configuration }} --no-restore
 
