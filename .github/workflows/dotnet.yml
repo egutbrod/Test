@@ -13,7 +13,7 @@ jobs:
       matrix:
         configuration: [Release]
 
-    runs-on: windows-latest 
+    runs-on: linux-latest 
 
     steps:
      # Checkout latest version of branch
