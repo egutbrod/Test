@@ -40,6 +40,8 @@ jobs:
       
     - name: Build
       run: msbuild /t:Build /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
 
     - name: Test
       run: dotnet test  --configuration ${{ matrix.configuration }} --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
