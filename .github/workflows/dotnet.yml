@@ -36,13 +36,13 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Restore Dependencies
-      run: dotnet restore src/Example.sln
+      run: dotnet restore 
       
     - name: Build
-      run: dotnet build src/Example.sln --configuration ${{ matrix.configuration }} --no-restore
+      run: dotnet build --configuration ${{ matrix.configuration }} --no-restore
 
     - name: Test
-      run: dotnet test src/Example.sln --configuration ${{ matrix.configuration }} --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
+      run: dotnet test  --configuration ${{ matrix.configuration }} --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
 
     - name: Code Coverage Report
       uses: irongut/CodeCoverageSummary@v1.3.0
