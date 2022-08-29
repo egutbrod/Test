@@ -1,8 +1,10 @@
 name: Slack Notifications
 
 on:
-  pull_request:
-    branches: [ master ]
+  workflow_run:
+    workflows: ['Test CI']                     
+    types:
+      - completed
 
 jobs:
   notifySlack:
@@ -10,6 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: dorny/test-reporter@v1
+      with:
+        artifact: test-results            # artifact name
+        name: xUnit Tests                  # Name of the check run which will be created
+        path: '*.xml'                     # Path to test results (inside artifact .zip)
+        reporter: dotnet-trx
+        only-summary: 'true'
+        
     - name: Notify slack
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
