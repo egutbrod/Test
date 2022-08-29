@@ -10,10 +10,7 @@ namespace UnitTestProject1
         [Fact]
         public void TestMethod1()
         {
-            var asd = new Form1();
-
-            
-            Assert.NotNull(asd);
+            Assert.True(false);
         }
     }
 }
