@@ -12,6 +12,7 @@ namespace UnitTestProject1
         {
             var asd = new Form1();
 
+            
             Assert.NotNull(asd);
         }
     }
