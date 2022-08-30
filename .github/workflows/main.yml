@@ -29,4 +29,4 @@ jobs:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       uses: abinoda/slack-action@master
       with:
-        args: '{\"channel\":\"C03V5CCT72T\",\"blocks\": [{\"type\": \"section\",\"text\": {\"type\": \"mrkdwn\",\"text\": \"*Trigger:* ${{ github.event.workflow_run.workflow_run.head_commit.message }}\"}},{\"type\": \"section\",\"text\": {\"type\": \"mrkdwn\",	\"text\": \"*Author:* ${{ github.event.workflow_run.workflow_run.head_commit.author.name }}\"	}},	{	\"type\": \"section\",\"text\": {	\"type\": \"mrkdwn\",	\"text\": \"*Build Status:* ${{ github.event.workflow_run.workflow.badge_url }}\"	}}]}'
+        args: '{\"channel\":\"C03V5CCT72T\",\"blocks\": [{\"type\": \"section\",\"text\": {\"type\": \"mrkdwn\",\"text\": \"*Trigger:* ${{ github.event.workflow_run.head_commit.message }}\"}},{\"type\": \"section\",\"text\": {\"type\": \"mrkdwn\",	\"text\": \"*Author:* ${{ github.event.workflow_run.head_commit.author.name }}\"	}},	{	\"type\": \"section\",\"text\": {	\"type\": \"mrkdwn\",	\"text\": \"*Build Status:* ${{ github.event.workflow_run.workflow.badge_url }}\"	}}]}'
