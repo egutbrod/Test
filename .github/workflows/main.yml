@@ -1,0 +1,42 @@
+name: Slack Notifications
+
+on:
+  workflow_run:
+    workflows: ['Test CI']                     
+    types:
+      - completed
+
+jobs:
+  notifySlack:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+    #Download Test Results
+    - name: Download Test results
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        workflow: dotnet.yml
+        workflow_conclusion: completed
+        path: ${{ github.workspace }}/test-results        
+          
+    - name: Create Test Report
+      id: testReport
+      uses: dorny/test-reporter@v1
+      with:
+        artifact: test-results            # artifact name
+        name: xUnit Tests                  # Name of the check run which will be created
+        path: '*.trx'                     # Path to test results (inside artifact .zip)
+        reporter: dotnet-trx
+        only-summary: 'false'
+        list-suites: 'all'
+        list-tests: 'all'
+        max-annotations: '10'
+        working-directory: ''
+        fail-on-error: 'false'
+        
+    - uses: 5monkeys/cobertura-action@master
+      with:
+          path: ${{ github.workspace }}/test-results/*.xml
+          minimum_coverage: 75
