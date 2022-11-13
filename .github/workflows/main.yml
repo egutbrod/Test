@@ -10,8 +10,17 @@ jobs:
   notifySlack:
 
     runs-on: ubuntu-latest
-
+    
     steps:
+    
+    #Download Test Results
+    - name: Download Test results
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        workflow: dotnet.yml
+        workflow_conclusion: completed
+        path: ${{ github.workspace }}/test-results        
+          
     - name: Create Test Report
       id: testReport
       uses: dorny/test-reporter@v1
@@ -25,8 +34,9 @@ jobs:
         list-tests: 'all'
         max-annotations: '10'
         working-directory: ''
+        fail-on-error: 'false'
         
     - uses: 5monkeys/cobertura-action@master
       with:
-          path: test-results/*.xml
+          path: ${{ github.workspace }}/test-results/*.xml
           minimum_coverage: 75
