@@ -28,5 +28,5 @@ jobs:
         
     - uses: 5monkeys/cobertura-action@master
       with:
-          path: coverage.cobertura.xml
+          path: test-results/*.xml
           minimum_coverage: 75
